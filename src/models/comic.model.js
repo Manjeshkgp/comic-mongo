@@ -40,4 +40,4 @@ const comicSchema = new mongoose.Schema(
 
 const Comic = mongoose.model("Comic", comicSchema);
 
-module.exports = Comic;
+module.exports = { Comic };
