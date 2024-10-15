@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { dbConnection } = require("./config/db.config");
 
 const app = express();
 
@@ -17,5 +18,11 @@ app.get("/", (_req, res) => {
 });
 
 app.listen(process.env.PORT, async () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+  try {
+    await dbConnection();
+    console.log(`Server running on port ${process.env.PORT}`);
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    process.exit(1);
+  }
 });
