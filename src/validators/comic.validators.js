@@ -3,7 +3,7 @@ const Joi = require("joi");
 const createComicSchema = Joi.object({
   name: Joi.string().required(),
   author: Joi.string().required(),
-  yearOfPublication: Joi.number().integer().min(1000).max(9999).required(),
+  year: Joi.number().integer().min(1000).max(9999).required(),
   price: Joi.number().required(),
   discount: Joi.number().optional(),
   numberOfPages: Joi.number().required(),
@@ -24,7 +24,7 @@ const validateCreateComic = (req, res, next) => {
 const updateComicSchema = Joi.object({
   name: Joi.string().disallow(null).optional(),
   author: Joi.string().disallow(null).optional(),
-  yearOfPublication: Joi.number()
+  year: Joi.number()
     .integer()
     .min(1000)
     .max(9999)
@@ -41,7 +41,7 @@ const updateComicSchema = Joi.object({
 }).or(
   "name",
   "author",
-  "yearOfPublication",
+  "year",
   "price",
   "discount",
   "numberOfPages",

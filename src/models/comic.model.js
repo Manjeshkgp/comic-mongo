@@ -10,7 +10,7 @@ const comicSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    yearOfPublication: {
+    year: {
       type: Number,
       required: true,
     },

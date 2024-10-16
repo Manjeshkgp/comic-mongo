@@ -1,10 +1,46 @@
 const { Comic } = require("../models/comic.model");
 
 class ComicController {
-  static async getAll(req, res) {
+  static async getList(req, res) {
     try {
-      const comics = await Comic.find();
-      res.status(200).json(comics);
+      const {
+        author,
+        year,
+        price,
+        condition,
+        name,
+        sortBy = "name",
+        order = "asc",
+        page = 1,
+        limit = 12,
+      } = req.query;
+      const filter = {};
+
+      if (author) filter.author = new RegExp(author, "i");
+      if (year) filter.year = parseInt(year);
+      if (price) filter.price = parseFloat(price);
+      if (condition) filter.condition = condition;
+      if (name) filter.name = new RegExp(name, "i");
+
+      const sortOptions = {};
+      sortOptions[sortBy] = order === "desc" ? -1 : 1;
+      const pageNumber = parseInt(page) || 1;
+      const pageSize = parseInt(limit) || 12;
+      const skip = (pageNumber - 1) * pageSize;
+
+      const comics = await Comic.find(filter)
+        .sort(sortOptions)
+        .skip(skip)
+        .limit(pageSize);
+
+      const total = await Comic.countDocuments(filter);
+
+      res.json({
+        totalComics: total,
+        totalPages: Math.ceil(total / pageSize),
+        currentPage: pageNumber,
+        data: comics,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });
