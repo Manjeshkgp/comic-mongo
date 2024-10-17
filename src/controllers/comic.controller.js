@@ -1,4 +1,5 @@
 const { Comic } = require("../models/comic.model");
+const logger = require("../services/logger.service");
 
 class ComicController {
   static async getList(req, res) {
@@ -42,7 +43,7 @@ class ComicController {
         data: comics,
       });
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       res.status(500).json({ error });
     }
   }
@@ -53,7 +54,7 @@ class ComicController {
       await newComic.save();
       res.status(201).json(newComic);
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       res.status(500).json({ error });
     }
   }
@@ -66,7 +67,7 @@ class ComicController {
       }
       res.status(200).json(comic);
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       res.status(500).json({ error });
     }
   }
@@ -83,7 +84,7 @@ class ComicController {
       }
       res.status(200).json(updatedComic);
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       res.status(500).json({ error });
     }
   }
@@ -96,7 +97,7 @@ class ComicController {
       }
       res.status(200).json({ message: "Comic deleted successfully" });
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       res.status(500).json({ error });
     }
   }
