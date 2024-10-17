@@ -38,7 +38,9 @@ app.get("/", (_req, res) => {
 
 app.use("/api", routes);
 
-app.listen(process.env.PORT, async () => {
+const PORT = process.env.PORT || 9000;
+
+app.listen(PORT, async () => {
   try {
     await dbConnection();
     logger.info(`Server running on port ${process.env.PORT}`);
