@@ -14,7 +14,6 @@ You must need NodeJS installed in your device to run that, if not installed then
 - Now run this command `npm i` to install all the node modules
 - Now create a `.env` file inside the folder
 - Add `PORT` as 9000 and also add a mongodb connection url as `DB_CONNECTION_URI`
-- As of now you can use this `mongodb+srv://manjeshkgp:9QzyY7KBVt_hms@comic-mongo.dyqul.mongodb.net/?retryWrites=true&w=majority&appName=comic-mongo` as `DB_CONNECTION_URI`
 - I know it's bad to share the DB Connection URL in public, but since I've no other way to share it.
 
 ## Running & Logging the Server
